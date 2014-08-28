@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title> Pelican with github pages | Sreekanth's Blog </title>
+
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css"/>
+  </head>
+  <body>
+    <div class=container>
+<div class="header">
+    <a href="/">Sreekanth's Blog</a> <span class="muted"></span>
+</div>
+
+<div class=navigation>
+    <ul>
+            <li><a href="/index.html">Blog</a> </li>
+            <li><a href="/archives.html">Archive</a> </li>
+            <li><a href="/pages/about.html">About</a> </li>
+    </ul>
+</div>
+<div class=separator></div>        
+        <div class=body>
+    <h1 class="title"> Pelican with github pages</h1>
+    <p class=date> 01 May, 2014 by <a href="/author/sreekanth.html">Sreekanth</a></p>
+    <p>Pelican is a static site generator written in python which allows you to write your content directly using <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. In this blog post, we will discuss how to create and host a static site using pelican and github pages.</p>
+<p><strong>Installation</strong></p>
+<p>Lets wrap all our installations inside a separate virtual environment using python virtual environment wrapper. </p>
+<p><a href="http://virtualenvwrapper.readthedocs.org/en/latest/install.html">Install python virtualenvwrapper</a></p>
+<p>Create a new virtual environment for our project:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">mkvirtualenv</span> <span class="n">pelican</span><span class="o">-</span><span class="n">blog</span>
+<span class="err">$</span> <span class="n">workon</span> <span class="n">pelican</span><span class="o">-</span><span class="n">blog</span>
+</pre></div>
+
+
+<p>Run pelican installation:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
+</pre></div>
+
+
+<p><a href="http://docs.getpelican.com/en/3.1.1/getting_started.html#installing-pelican">Checkout more installation options for pelican</a></p>
+<p>Run markdown installation:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">Markdown</span>
+</pre></div>
+
+
+<p>You can also use reStructuredText  for writing your content.</p>
+<p><strong>Quickstart your blog</strong></p>
+<p>Now we have finished all our installations and lets create a skeleton for our site using the pelican <em>quickstart</em> command. This will ask you few questions and will pre-populate the settings data as per your answers. These settings can be changed at any point of time.</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+
+
+<p>Please see how I have answered the quickstart questions below:</p>
+<div class="highlight"><pre><span class="n">Welcome</span> <span class="n">to</span> <span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span> <span class="n">v3</span><span class="mf">.4.0</span><span class="p">.</span>
+
+<span class="n">This</span> <span class="n">script</span> <span class="n">will</span> <span class="n">help</span> <span class="n">you</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">Pelican</span><span class="o">-</span><span class="n">based</span> <span class="n">website</span><span class="p">.</span>
+
+<span class="n">Please</span> <span class="n">answer</span> <span class="n">the</span> <span class="n">following</span> <span class="n">questions</span> <span class="n">so</span> <span class="n">this</span> <span class="n">script</span> <span class="n">can</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">files</span> <span class="n">needed</span> <span class="n">by</span> <span class="n">Pelican</span><span class="p">.</span>
+
+<span class="o">&gt;</span> <span class="n">Where</span> <span class="k">do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">create</span> <span class="n">your</span> <span class="n">new</span> <span class="n">web</span> <span class="n">site</span><span class="o">?</span> <span class="p">[.]</span>
+<span class="o">&gt;</span> <span class="n">What</span> <span class="n">will</span> <span class="n">be</span> <span class="n">the</span> <span class="n">title</span> <span class="n">of</span> <span class="n">this</span> <span class="n">web</span> <span class="n">site</span><span class="o">?</span> <span class="n">Sreekanth</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">Blog</span> 
+<span class="o">&gt;</span> <span class="n">Who</span> <span class="n">will</span> <span class="n">be</span> <span class="n">the</span> <span class="n">author</span> <span class="n">of</span> <span class="n">this</span> <span class="n">web</span> <span class="n">site</span><span class="o">?</span> <span class="n">Sreekanth</span>
+<span class="o">&gt;</span> <span class="n">What</span> <span class="n">will</span> <span class="n">be</span> <span class="n">the</span> <span class="k">default</span> <span class="n">language</span> <span class="n">of</span> <span class="n">this</span> <span class="n">web</span> <span class="n">site</span><span class="o">?</span> <span class="p">[</span><span class="n">en</span><span class="p">]</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">a</span> <span class="n">URL</span> <span class="n">prefix</span><span class="o">?</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.,</span> <span class="n">http</span><span class="o">:</span><span class="c1">//example.com   (Y/n)  </span>
+<span class="o">&gt;</span> <span class="n">What</span> <span class="n">is</span> <span class="n">your</span> <span class="n">URL</span> <span class="n">prefix</span><span class="o">?</span> <span class="p">(</span><span class="n">see</span> <span class="n">above</span> <span class="n">example</span><span class="p">;</span> <span class="n">no</span> <span class="n">trailing</span> <span class="n">slash</span><span class="p">)</span> <span class="n">http</span><span class="o">:</span><span class="c1">//sreekanthkaralmanna.github.io  </span>
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">enable</span> <span class="n">article</span> <span class="n">pagination</span><span class="o">?</span> <span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>  <span class="n">How</span> <span class="n">many</span> <span class="n">articles</span> <span class="n">per</span> <span class="n">page</span> <span class="k">do</span> <span class="n">you</span> <span class="n">want</span><span class="o">?</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">a</span> <span class="n">Fabfile</span><span class="o">/</span><span class="n">Makefile</span> <span class="n">to</span> <span class="n">automate</span> <span class="n">generation</span> <span class="n">and</span> <span class="n">publishing</span><span class="o">?</span> <span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">an</span> <span class="k">auto</span><span class="o">-</span><span class="n">reload</span> <span class="o">&amp;</span> <span class="n">simpleHTTP</span> <span class="n">script</span> <span class="n">to</span> <span class="n">assist</span> <span class="n">with</span> <span class="n">theme</span> <span class="n">and</span> <span class="n">site</span> <span class="n">development</span><span class="o">?</span> <span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">FTP</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">SSH</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">Dropbox</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">S3</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">Rackspace</span> <span class="n">Cloud</span> <span class="n">Files</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
+<span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">upload</span> <span class="n">your</span> <span class="n">website</span> <span class="n">using</span> <span class="n">GitHub</span> <span class="n">Pages</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
+<span class="n">Done</span><span class="p">.</span> <span class="n">Your</span> <span class="n">new</span> <span class="n">project</span> <span class="n">is</span> <span class="n">available</span> <span class="n">at</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">sreekanth</span><span class="o">/</span><span class="n">Documents</span>
+</pre></div>
+
+
+<p>Once you finish with all those questions, you will be having a directory structure as follows:</p>
+<div class="highlight"><pre><span class="n">yourproject</span><span class="o">/</span>
+<span class="err">├──</span> <span class="n">content</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="p">(</span><span class="n">pages</span><span class="p">)</span>
+<span class="err">├──</span> <span class="n">output</span>
+<span class="err">├──</span> <span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span>
+<span class="err">├──</span> <span class="n">fabfile</span><span class="p">.</span><span class="n">py</span>
+<span class="err">├──</span> <span class="n">Makefile</span>
+<span class="err">├──</span> <span class="n">pelicanconf</span><span class="p">.</span><span class="n">py</span>       <span class="err">#</span> <span class="n">Main</span> <span class="n">settings</span> <span class="n">file</span>
+<span class="err">└──</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>       <span class="err">#</span> <span class="n">Settings</span> <span class="n">to</span> <span class="n">use</span> <span class="n">when</span> <span class="n">ready</span> <span class="n">to</span> <span class="n">publish</span>
+</pre></div>
+
+
+<p><strong>Customise your theme</strong></p>
+<p>Pelican comes with  a default theme for every sites generated. You can use a variety of other themes to beautify your site.  I have used <a href="https://github.com/fjavieralba/flasky">flasky</a> theme for creating this site.
+<a href="https://github.com/getpelican/pelican-themes">Pelican themes</a></p>
+<p>In order to include your desired theme, clone your preferred theme and save the theme to a theme directory inside your project folder. Now tell pelican that it has to use  this particular theme to generate html for your site. In <code>pelicanconfig.py</code>, add the following:</p>
+<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s">&quot;themes/flasky&quot;</span>
+</pre></div>
+
+
+<p>Also make sure to change your pelican settings as per the settinfgs given in the theme documentations(if any)</p>
+<p><strong>Writing blog content</strong></p>
+<p>We are done with configuring our pelican site, now let's start writing our blog contents. Below given is a sample markdown file. </p>
+<div class="highlight"><pre><span class="n">Title</span><span class="o">:</span> <span class="n">Pelican</span> <span class="n">Test</span> <span class="n">Blog</span> 
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">00</span> 
+<span class="n">Category</span><span class="o">:</span> <span class="n">Python</span> 
+<span class="n">Tags</span><span class="o">:</span> <span class="n">python</span>  
+<span class="n">Author</span><span class="o">:</span> <span class="n">Sreekanth</span>  
+<span class="n">Summary</span><span class="o">:</span> <span class="n">Pelican</span> <span class="n">blog</span> <span class="k">for</span> <span class="n">testing</span><span class="o">.</span>
+
+<span class="n">A</span> <span class="n">Pelican</span> <span class="n">blog</span> <span class="k">for</span> <span class="n">testing</span>
+</pre></div>
+
+
+<p><strong>Generate html files and run your site</strong></p>
+<p>We are all done to test our site locally</p>
+<p>The following command will create the output folder for your site and serves your site locally at http://localhost:8000.</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">make</span> <span class="n">devserver</span>
+</pre></div>
+
+
+<p>To stop the localhost server, run the following command:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">devserver</span> <span class="n">stop</span>
+</pre></div>
+
+
+<p><strong>Publish your blog using Github pages</strong></p>
+<p>For hosting your blog using github pages, create a repository named <em>username</em>.github.io and this will be the remote repository for your site. Contents of your output directory needs to be stored in this repository.</p>
+<p>After creating the github repository, push your output files to the remote repository. Follow the steps given below for doing the same.</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">cd</span> <span class="n">output</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">init</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/username/username.github.io.git</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">add</span> <span class="o">--</span><span class="n">all</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s">&quot;initial commit&quot;</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+
+
+<p>In order to backup your content Markdown files, configuration files, and theme files, it's good to initialise your main site directory with a different git repository.</p>
+<p>We are done with that too. Checkout username.github.com to see your site running properly.</p>
+    
+<div class=twitter>
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+    <p class=tags>This entry was tagged as
+      <a href="/tag/python.html">python</a>
+      <a href="/tag/pelican.html">pelican</a>
+    </p>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'sreekanth_p'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+        
+<div class=footer>
+  <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Sreekanth</p>
+  <p> Powered by <a href="http://pypi.python.org/pypi/pelican/" target="_blank">Pelican</a>.  
+    <a href="https://github.com/fjavieralba/flasky">Theme</a>  by <a href="http://fjavieralba.com">fjavieralba</a>
+  </p> 
+  <p>
+    <div class=social style="font-size: 27px;">
+      <ul>
+        <script language="JavaScript">
+          u = 'sreekanthkaralmanna';
+          s = 'gmail.com';
+          document.write('<a href=\"mailto:' + u + '@' + s + '\" target=\"_blank\">');
+        </script>
+            <li><i class="icon-envelope icon-large"></i> </li>
+        </a>
+        <a href="http://twitter.com/sreekanthp91" target="_blank"> <li> <i class="icon-twitter-sign icon-large"> </li></i> </a>
+        <a href="https://www.linkedin.com/profile/view?id=96839960" target="_blank"><li><i class="icon-linkedin-sign icon-large" ></i></li></a>
+        <a href="http://github.com/you" target="_blank"> <li> <i class="icon-github-sign icon-large"></i> </li> </a>
+        <a href="http://www.facebook.com/sreekanthkaralmanna" target="_blank"><li> <i class="icon-facebook-sign icon-large"></i></li> </a>
+        <a href="https://plus.google.com/u/0/106300911869415325463/posts" target="_blank"><li><i class="icon-google-plus-sign icon-large"></i> </li> </a>
+        <!-- <a href="" target="_blank"><li><i class="icon-pinterest-sign icon-large"></i></li></a> -->
+
+
+        <a href="/feeds/all.rss.xml" rel="alternate" title="Recent Blog Posts"><li> <i class="icon-rss icon-large"></i> </li></a>
+      </ul>
+    </div>
+  </p>
+</div>    </div>
+  </body>
+</html>
